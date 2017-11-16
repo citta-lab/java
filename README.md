@@ -1,8 +1,6 @@
 java [ juggling pebbles ]
 --------------------------
-How we declare out classes, methods and variables affects the code behaviour.  
-(i). Access modifiers: public, protected, private.  
-(ii). Non-access modifiers (including strictfp, final, and abstract)
+How we declare our classes, methods and variables affects the code behavior.  
 
 ### Tips
 * A `public` method can be accessed from anywhere in our application where as `private` method can only be accessed within the class.
@@ -20,7 +18,6 @@ How we declare out classes, methods and variables affects the code behaviour.
 * `sout` : System.out.println();
 * `Command + Option + L` => reformat the code.
 * `Command + /` => comment selected line.
-*
 
 #### 1. Method Overloading:
 
@@ -60,3 +57,47 @@ public void setColor(String color) {
 The reason why getters and setters are defined by `public` access modifiers and their corresponding variables are in `private` because, not to let any classes access or set the variable directly instead go through the getters/setters. If we have validation check then we can prevent any harm from wrong data. There is also great article discussion on getters and setters ( data encapsulation ) in [StackExchange](https://softwareengineering.stackexchange.com/questions/21802/when-are-getters-and-setters-justified)
 
 > Remember `private` access modifiers do not let any class to access those defined variables and methods.
+
+#### 3. Constructor:
+
+In java every time we instantiate the class using `new` keyword we are calling a constructor of the class. We can override the default Constructor by defining the same classname method with just the access modifier. Constructor methods can be overloaded ( can created multiple method of same name by passing different parameters ). Example:
+
+3.1 Checking default Constructor:   
+```java
+pubic class Person {
+  /* no body*/
+}
+Person bob = new Person(); /*instantiate the class, which calls default constructor Person */
+```
+
+3.2 Behind the Scene
+```java
+pubic class Person {
+  public Person (){ /*same name as class and no data types */
+    /*default Constructor*/
+  }
+}
+Person bob = new Person();
+```
+Default values can be set in default constructor and the default Constructor can call other Constructor ( method overloaded constructor).
+
+3.3 Method overloading in Constructor:
+```java
+pubic class Person {
+  private String name;
+  private int age;
+
+  public Person (){
+    this("Bob", 24); /* this has to be first line in the default Constructor and calls the below method overloaded Constructor */
+  }
+
+  // called by above Constructor
+  public Person (String name, int age){
+    this.name = name; // set to class name variable
+    this.age = age; // set to class age variable
+  }
+}
+
+Person bob = new Person(); // calling class without passing default values for Constructor and hence the Bob and 24 will be picked.
+Person tom = new Person("Tom", 45); //calls the second overloaded Constructor method in the class.
+```
