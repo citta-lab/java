@@ -65,7 +65,7 @@ In java every time we instantiate the class using `new` keyword we are calling a
 3.1 Checking default Constructor:   
 ```java
 pubic class Person {
-  /* no body*/
+  /* no body*/  // public Person (){}; will be called by default.
 }
 Person bob = new Person(); /*instantiate the class, which calls default constructor Person */
 ```
@@ -74,12 +74,12 @@ Person bob = new Person(); /*instantiate the class, which calls default construc
 ```java
 pubic class Person {
   public Person (){ /*same name as class and no data types */
-    /*default Constructor*/
+    /*explicitly defining the default Constructor*/
   }
 }
 Person bob = new Person();
 ```
-Default values can be set in default constructor and the default Constructor can call other Constructor ( method overloaded constructor).
+Default values can be set in default constructor and the default Constructor can call other Constructor ( method overloaded constructor). Typically its a good practice to set the variable values in the Constructor using `this` keyword instead of using setters and getters.
 
 3.3 Method overloading in Constructor:
 ```java
@@ -101,3 +101,4 @@ pubic class Person {
 Person bob = new Person(); // calling class without passing default values for Constructor and hence the Bob and 24 will be picked.
 Person tom = new Person("Tom", 45); //calls the second overloaded Constructor method in the class.
 ```
+So Constructor are called whenever the class object has been instantiated, however Constructor methods are not considered member of the class and will always have same name as the class without any return type. When we explicitly define a constructor with parameters then we have overwritten the default constructor ( the one with no parameters ). If we want to make use of the default constructor then we need to define that explicitly by defining the empty constructor. [Constructor Overloading in Java with examples](https://beginnersbook.com/2013/05/constructor-overloading/).
