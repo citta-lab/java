@@ -65,17 +65,19 @@ In java every time we instantiate the class using `new` keyword we are calling a
 3.1 Checking default Constructor:   
 ```java
 pubic class Person {
-  /* no body*/  // public Person (){}; will be called by default.
+  /* no body*/
 }
-Person bob = new Person(); /*instantiate the class, which calls default constructor Person */
+// public Person (){}; will be called by default.
+Person bob = new Person();
+/*instantiate the class, which calls default constructor Person */
 ```
 
 3.2 Behind the Scene
 ```java
 pubic class Person {
   public Person (){ /*same name as class and no data types */
-    /*explicitly defining the default Constructor*/
-  }
+    }
+  /*explicitly defining the default Constructor*/
 }
 Person bob = new Person();
 ```
@@ -88,8 +90,9 @@ pubic class Person {
   private int age;
 
   public Person (){
-    this("Bob", 24); /* this has to be first line in the default Constructor and calls the below method overloaded Constructor */
+    this("Bob", 24);
   }
+  /* this has to be first line in the default Constructor and calls the below method overloaded Constructor */
 
   // called by above Constructor
   public Person (String name, int age){
@@ -98,8 +101,10 @@ pubic class Person {
   }
 }
 
-Person bob = new Person(); // calling class without passing default values for Constructor and hence the Bob and 24 will be picked.
-Person tom = new Person("Tom", 45); //calls the second overloaded Constructor method in the class.
+Person bob = new Person();
+// calling class without passing default values for Constructor and hence the Bob and 24 will be picked.
+Person tom = new Person("Tom", 45);
+//calls the second overloaded Constructor method in the class.
 ```
 Here is the example of using [multiple constructors](https://github.com/citta-lab/java/blob/master/constructors/constructor.md). So Constructor are called whenever the class object has been instantiated, however Constructor methods are not considered member of the class and will always have same name as the class without any return type. When we explicitly define a constructor with parameters then we have overwritten the default constructor ( the one with no parameters ). If we want to make use of the default constructor then we need to define that explicitly by defining the empty constructor. [Constructor Overloading in Java with examples](https://beginnersbook.com/2013/05/constructor-overloading/).
 
@@ -131,7 +136,7 @@ public class Animal {
   }
 }
 ```
-4.2: Child class:
+4.2: Child class:     
 Now we create child class inheriting the parent class, so by default all public property of the parent class will be available to the child.
 ```java
 public class Dog extends Animal {
@@ -150,7 +155,7 @@ public class Dog extends Animal {
 
 
 ### Code Review Checklist
-Separate checklist to follow some of the best practices in programming.
+Separate checklist to follow some of the best practices in programming [Code Review](https://github.com/citta-lab/java/blob/master/codereview.md)
 
 ### Error:
 
