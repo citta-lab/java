@@ -105,10 +105,52 @@ Here is the example of using [multiple constructors](https://github.com/citta-la
 
 ### 4. Inheritance:
 
-Inheritance can be implemented by extending the child class with another base class ( acts as parent ). Example: `public class Dog extends Animal`. In child class ( Dog ) we need to use `super` to call the default constructor from the parent class (Animal). We can access all public variables, methods of parent (Animal) via child class instance variable ( which looks child class first, and if it doesn't find then it will call parent class method etc). However we can by pass this by using `super`. Example: `super.parentClassMethod()`. 
+Inheritance can be implemented by extending the child class with another base class ( acts as parent ). Example: `public class Dog extends Animal`. In child class ( Dog ) we need to use `super` to call the default constructor from the parent class (Animal). We can access all public variables, methods of parent (Animal) via child class instance variable ( which looks child class first, and if it doesn't find then it will call parent class method etc). However we can by pass this by using `super`. Example: `super.parentClassMethod()`.
+
+4.1: Parent class:             
+Lets assume the Animal can be called by instantiating the class with no parameters i.e `new Animal();` or passing two required parameters i.e `new Animal("jack",3);`. Also animal class has its unique method checkHealth.
+```java
+public class Animal {
+  private String name;
+  private int age;
+
+  //constructor with 2 param
+  public Animal(String name, int age){
+    this.name = name;
+    this.age = age;
+  }
+
+  //overwritten default constructor
+  public Animal(){
+    this("Default", 1);
+  }
+
+  //method in parent class
+  public void checkHealth(){
+    /*....some logic...*/
+  }
+}
+```
+4.2: Child class:
+Now we create child class inheriting the parent class, so by default all public property of the parent class will be available to the child.
+```java
+public class Dog extends Animal {
+  private int color;
+
+  // constructor with 3 parameter, passing two to parent class Animal by using super.
+  public Dog(int color, String name, int age){
+    super(name,age);
+    this.color = color;
+  }
+
+  // calling parent method, we can also overwrite parent method.
+  super.checkHealth();
+}
+```
 
 
-
+### Code Review Checklist
+Separate checklist to follow some of the best practices in programming.
 
 ### Error:
 
