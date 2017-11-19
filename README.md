@@ -13,6 +13,7 @@ How we declare our classes, methods and variables affects the code behavior.
 * Every `object` has `state` and `behavior`. variable, type defines the state of the object whereas method defines the behavior of the object. Example: If an ant is an object, then the color, size, number of legs can be state and the functionality it is performing ( eating, scrapping, carrying ) can be behavior.
 * Access modifiers: `private`- (when defined declaring class or variable ) No other classes can access this class. `protected`- classes inside the same package can access the class. `public` - all classes have access and we can also define classes without access modifiers.
 * Whenever we instantiate the class by using `new` it uses the class constructor to create the object. Example: `Book textBook = new Book();`
+* Every declared class by default extends Object class.
 
 ### IntelliJ Shortcut:
 * `sout` : System.out.println();
@@ -152,7 +153,80 @@ public class Dog extends Animal {
   super.checkHealth();
 }
 ```
+>if we have need to overwrite parent class method in child class ( inheritance ) then its ideal to use parent class method directly in child class instead of using super. i.e super.parentMethod().
 
+### 5. Composition & Encapsulation:
+
+In java we cannot do multiple inheritance and can only extend one super class, to avoid this people often use interface to overcome this problem. Also subclasses must declare super class constructors and has to pass all the required parameters. So developers often use class composition to have more flexibility in the code layer, Composition is nothing but calling different class object with in another class to process the required functionality. Encapsulation is hiding variable and/or method access to other class by declaring them `private`. The best example for encapsulation is `setter and getter class`. The below example covers both class composition and encapsulation,
+
+5.1: What ?  
+Lets create person class which should get instantiated if the `sex` is passed as an argument and if the `sex` is valid then we can let other classes to access the `processPerson` method to pass the age of the person and respond with the message. `Sex` class we should only take gender string as `male` or `female` and people shouldn't be allowed to set gender directly or age directly in `Person` class ( encapsulation in both case ).
+
+5.2: Sex Class  
+```java
+public class Sex {
+    private String gender;
+
+    // must have and hence in constructor
+    public Sex(String gender) {
+        if (gender.equals("male") || gender.equals("female")){
+            this.gender = gender;
+        }
+    }
+
+    //can read the gender
+    public String getGender() {
+        return gender;
+    }
+}
+//note we don't have setter here and gender will be set at class instantiation
+```
+Now lets look at the Person class,
+5.3: Person class   
+```java
+public class Person {
+    private Sex sex;
+    private int age = 0;
+
+    public Person(Sex sex) {
+        this.sex = sex;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    private void setAge(int age) {
+        this.age = age;
+    }
+
+    public void processPerson(int age){
+        if (sex.getGender() != null && age > 0 ){
+            this.setAge(age);
+        }
+        if (sex.getGender().equals("male")){
+            System.out.println(" Congrats you are great dude of "+getAge()+ " old !!");
+        }
+        if ( sex.getGender().equals("female")){
+            System.out.println(" Congrats you are pretty princess of "+getAge()+ " old !!");
+        }
+    }
+}
+// Person object instantiated with Sex object ( composition )
+//setAge is private and can't be accessed outside of this class ( encapsulation )
+```
+5.4: Main class   
+```java
+public class Main {
+    public static void main(String[] args) {
+        Sex sex = new Sex("female");
+        Person person = new Person(sex);
+        person.processPerson(5);
+    }
+}
+```
+
+> In java community programers debate on using between inheritance vs class composition. It's always a good practice to use class composition for the flexibility over inheritance.
 
 ### Code Review Checklist
 Separate checklist to follow some of the best practices in programming [Code Review](https://github.com/citta-lab/java/blob/master/codereview.md)
