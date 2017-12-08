@@ -238,6 +238,7 @@ When we inherit a subclass (example: BMW ) from parent class  (example: Car) we 
 We need to initialize an array with a size before using it, let's say we created an array of size 5 and assign 5 values to it ( you can't assign more than 5, as the maximum size is 5 ). But later we have a situation where we need to store two more elements in the same array and retain the previous value then there is no easy way but copy the original array to another temp array, change the size of original array from 5 to 7 and loop though the temp array to copy the elements back to original array. This will be tedious when we have to alter the size often, this can be solved by `List` and more specifically `ArrayList`. So ArrayList is an resizable array where it manages the resizing and it holds the object.
 
 7.1 Array Resize
+
 ```java
 int[] temp = originalArray;
 originalArray = new int[7];
@@ -247,16 +248,19 @@ for ( int i=0; i< temp.length; i++ ){
 ```
 > ArrayList interface extends List interface, List interface extends collection interface, and extends Iterable. In array list we need to define type inside the < > by replacing Elements `ArrayList<E>`. So this would become `ArrayList<Integer>` instead of in array `int[] array`.
 
-7.2 Creating new ArrayList vs Array    
+7.2 Creating new ArrayList vs Array  
+
 ```java
 int[] newArray = new int[7];
 ArrayList<Integer> newListArray = new ArrayList<Integer>();
 //ArrayList<E> newListArray = new ArrayList<E>();
 ```
-7.3 Why `new` in Array vs ArrayList ?    
+7.3 Why `new` in Array vs ArrayList ?  
+
 Arrays in java are objects, name of an array is an reference and `new` keyword creates an array in the heap and returns the reference to newly created array. In ArrayList, it is a class and we are instantiating new object by using keyword `key`.
 
 7.4 Converting ArrayList to Array.   
+
 It consist of two steps, creating an array of size equals to ArrayList and then converting the ArrayList to array by passing the variable it suppose to save.
 ```java
 String[] newArray = new String[newListArray.getNewListArray().size()]; /* initialize to correct size */
@@ -265,6 +269,7 @@ newArray = newListArray.getNewListArray().toArray(newArray);
 ```
 
 7.5 ArrayList size.
+
 ArrayList size auto-increment in sequence of 10, the initial size has been set in default constructor upon creating ArrayList, when we try to assign more elements than 10 then it increases in increment of 10.
 ```java
 public ArrayList(){
@@ -273,6 +278,7 @@ public ArrayList(){
 ```
 
 7.6 Create object (of type some class) from String.
+   
 More often we accept/receive string or int or other data type values and we need to pass it to method which only receives object of particular type class. So the way we would need to do is converting the string (in this example) to object of that class. Example: Let say `String name = "Jack"; String race = "White";` name & race needs to be saved in `ArrayList<People> newPeople = new ArrayList<People>();` ( array list of type People ) using method `addPeople` which takes People object.
 ```java
 public void addPeople(People people){

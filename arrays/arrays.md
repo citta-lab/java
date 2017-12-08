@@ -62,11 +62,13 @@ valueList.remove(position); // (0) will remove Rob and valueList will be empty.
 #### 2. Copy ArrayList
 
 2.1
+    
 ```java
 ArrayList<String> newList = new ArrayList<String>(oldArrayList.getOldArrayList);
 /* (oldArrayList.getOldArrayList) where getOldArrayList is getter method on oldArrayList */
 ```
 2.2
+
 ```java
 ArrayList<String> newList = new ArrayList<String>();
 newList.addAll(oldArrayList.getOldArrayList);
@@ -77,7 +79,8 @@ newList.addAll(oldArrayList.getOldArrayList);
 
 If we have an arrayList of type some class and we want to retrieve values then we can use traditional for-loop or latest for each loop as mentioned below, and let us say Contact has constructor which initializes two variables `name` and `phoneNumber`. We also have getter and setter method for the same in Contact class.
 
-3.1 for  
+3.1 for   
+
 ```java
 ArrayList<Contact> contact = new ArrayList<Contact>();
 // some code implementation which add's values to contact object.
@@ -87,6 +90,7 @@ for(int i=0; i<contact.size(); i++){
 ```
 
 3.2 for each
+
 ```java
 ArrayList<Contact> contact = new ArrayList<Contact>();
 // some code implementation which add's values to contact object.
@@ -97,7 +101,8 @@ for(Contact c :contact){
 
 #### 4. Factory Method & call constructor from Scanner.
 
-4.1 Normal Way
+4.1 Normal Way    
+
 If we are trying to pass values to constructors to initialize the object with default value then we do it while creating an object. let's say Contact class has default constructor which saves string values `name` and `number`. So the `Contact` class looks like,
 ```java
 public class Contact {
