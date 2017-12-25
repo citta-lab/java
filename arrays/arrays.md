@@ -62,7 +62,7 @@ valueList.remove(position); // (0) will remove Rob and valueList will be empty.
 #### 2. Copy ArrayList
 
 2.1
-    
+
 ```java
 ArrayList<String> newList = new ArrayList<String>(oldArrayList.getOldArrayList);
 /* (oldArrayList.getOldArrayList) where getOldArrayList is getter method on oldArrayList */
@@ -158,3 +158,54 @@ private static void addContact(){
   buildList.add(newContact);
 }
 ```
+
+#### 5. Auto-boxing and Unboxing
+
+Similar to above scenario we cannot directly save `int` ( int is primitive type ) in ArrayList but needs to be converted to `Class` type ( like Integer is a class ). In this scenario we can achieve this by writing a wrapper class and/or using inbuilt java auto-boxing feature which converts int to `Integer`.
+
+5.1 Wrapper Class
+```java
+//Actual values
+int saveValue = 12;
+
+//Wrapper class
+class IntWrapper {
+  private int myValue;
+
+  public IntWrapper(int value){
+    this.myValue = value;
+  }
+  /*... setter and getters ...*/
+}
+
+//Converting int to class
+ArrayList<IntWrapper> newList = new ArrayList<IntWrapper>();
+newList.add(new IntWrapper(saveValue));
+```
+
+5.2 Auto-boxing
+```java
+int saveValue = 12;
+Integer value = new Integer(saveValue);
+
+ArrayList<Integer> newList = new ArrayList<Integer>();
+newList.add(value); //one way
+newList.add(Integer.valueOf(12)); //second way which converts int value to integer class
+```
+We might have also seen people using `Integer value = 56;` without instantiating the Integer class. Here java is converting int to Integer type at compile time (i.e `Integer value = new Integer(56);`).
+
+5.3 unboxing
+```java
+ArrayList<Integer> newList = new ArrayList<Integer>();
+/*..code to add some values ***/
+//one way
+for(int i=0; i<=newList.size(); i++){
+  System.out.println(newList.get(i).intValue());
+}
+
+//second way
+for (int i:newList){
+  System.out.println(i);
+}
+```
+Similar to the above `Integer value = 56;` scenario we can also do `int check = value;` where java is doing unboxing for us by doing `int check = value.intValue();` at compile time.

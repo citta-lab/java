@@ -21,6 +21,20 @@ How we declare our classes, methods and variables affects the code behavior.
 * `Command + Option + L` => reformat the code.
 * `Command + /` => comment selected line.
 
+### IntelliJ Build:
+* If we need to build a standalone java project then `Build > Build Project`. This will create `out/production/project/..` directory with compiled files and manifest.
+* If we need to build a jar file from the standalone java project then we need to perform two steps
+  1.`File > ( Project Setting ) Artifacts > + > JAR > From modules with dependencies... > OK ` will set the details for creating artifacts.
+  2.`Build > Build Artifacts > project name > (Action) Build ` this will create jar file inside `out/artifacts/project_name_jar/`
+  3.Converting java project to java maven project [Converting a Java project to use Maven in IntelliJ IDEA](https://www.youtube.com/watch?v=s-nXWFQMXY0)
+
+### Console Tricks:
+* view jar files : `jar tf target/project_name-1.0-SNAPSHOT.jar`
+* read file inside jar : `unzip -p target/project_name-1.0-SNAPSHOT.jar META-INF/MANIFEST.MF` here MANIFEST.MF is the file we are interested.
+* setting mac environment variable `~/.bash_profile`
+
+
+
 ### 1. Method Overloading:
 
 Have the same method name with in the class but have different parameters as arguments. We cannot do method overloading by changing the data type or return type ( declaring as void ) but can only be achieved by having different arguments in the method declaration. Below is the example of method overloading ( in ruby we cannot do method overloading as we are doing here ).
@@ -255,6 +269,8 @@ int[] newArray = new int[7];
 ArrayList<Integer> newListArray = new ArrayList<Integer>();
 //ArrayList<E> newListArray = new ArrayList<E>();
 ```
+`int` is a primitive type and ArrayList only takes classes. for example we can use String (String is a class) inside ArrayList but not `int`.
+
 7.3 Why `new` in Array vs ArrayList ?  
 
 Arrays in java are objects, name of an array is an reference and `new` keyword creates an array in the heap and returns the reference to newly created array. In ArrayList, it is a class and we are instantiating new object by using keyword `key`.
@@ -278,7 +294,7 @@ public ArrayList(){
 ```
 
 7.6 Create object (of type some class) from String.
-   
+
 More often we accept/receive string or int or other data type values and we need to pass it to method which only receives object of particular type class. So the way we would need to do is converting the string (in this example) to object of that class. Example: Let say `String name = "Jack"; String race = "White";` name & race needs to be saved in `ArrayList<People> newPeople = new ArrayList<People>();` ( array list of type People ) using method `addPeople` which takes People object.
 ```java
 public void addPeople(People people){
