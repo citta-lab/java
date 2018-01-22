@@ -209,3 +209,30 @@ for (int i:newList){
 }
 ```
 Similar to the above `Integer value = 56;` scenario we can also do `int check = value;` where java is doing unboxing for us by doing `int check = value.intValue();` at compile time.
+
+5.4 More Examples:
+```java
+GenericBox<Integer> box2 = new GenericBox<Integer>(123);  // autobox int to Integer
+int i = box2.getContent();       // downcast to Integer, auto-unbox to int
+
+GenericBox<Double> box3 = new GenericBox<Double>(55.66);  // autobox double to Double
+double d = box3.getContent();     // downcast to Double, auto-unbox to double
+```
+
+5.5 finding String value in ArrayList<SomeClass>
+
+If we are trying to find existing string value in ArrayList of different class then we need to either convert the String name to an object of that class or extract the string values from the class and compare with the interested string. Example: Lets say Book class has name and author variables. Bookshelf has ArrayList of books.
+```java
+class Bookshelf {
+  ArrayList<Book> books = new ArrayList<Book>();
+  public boolean findBook(String name){
+    for (int i=0; i<books.size(); i++){
+      if ( books.get(i).getname.equals(name)){
+        return true;
+      }
+    }
+    return false;
+  }
+}
+```
+Here `books.get(i)` returns the Book class object.

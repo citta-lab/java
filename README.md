@@ -14,7 +14,10 @@ How we declare our classes, methods and variables affects the code behavior.
 * Access modifiers: `private`- (when defined declaring class or variable ) No other classes can access this class. `protected`- classes inside the same package can access the class. `public` - all classes have access and we can also define classes without access modifiers.
 * Whenever we instantiate the class by using `new` it uses the class constructor to create the object. Example: `Book textBook = new Book();`
 * Every declared class by default extends Object class.
-* Retrieving the class name `getClass().getSimpleName()`
+* Retrieving the class name `getClass().getSimpleName()`.
+* String is not a primitive type, but a class. Primitive types can't be used directly in ArrayList and hence all primitive types needs to be converted to class before saving.
+* Type conversion during invocation based on the type declaration. Example: `MyGenericArrayList<E>` declare a generics class with a formal type parameter <E>. During an actual invocation, e.g., `MyGenericArrayList<String>`, a specific type <String>, or actual type parameter, replaced the formal type parameter <E>.
+* Erasure, is the process in which compiler translates generic type class `public class MyGenericArrayList<E>` and/or generic type methods `public static <E> void ArrayToArrayList(E[] a, ArrayList<E> lst) { ... }` during compilation. All the generic types are replaced with type Object by default (or the upper bound of type). The translated version of method is as follows: `public static void ArrayToArrayList(Object[] a, ArrayList lst) { ... }`.
 
 ### IntelliJ Shortcut:
 * `sout` : System.out.println();

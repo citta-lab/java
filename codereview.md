@@ -17,3 +17,22 @@ this.size = size;
 //super.parentClassMethod();
 parentClassMethod(); //this will check if current (child) class has this method if not then it will refer parent class method.
 ```
+
+### Try Catch
+1. Write stack-trace in logger than printing it via printStackTrace(). Writing something in custom logger will give us an option to move, review or reuse in other places for troubleshooting. Also if we are printing in logger we don't have to do `e.printStackTrace();` in catch block.
+```java
+catch(Exception e){
+  //e.printStackTrace(); can be avoided as we are capturing in the log.
+  logger.error(" Problem while processing your payment", e);
+}
+```
+2. If we need to Re-Throw exception
+In few scenario we want to throw exception and not swallow it in catch block. Then for better logging / troubleshooting we can catch an exception and re-throw the same.
+```java
+try{
+  ....
+} catch (SQLException e){
+  logger.e("Problem writing data to database", e);
+  throw e; //this will throw the same exception to it's calling method/class. 
+}
+```
