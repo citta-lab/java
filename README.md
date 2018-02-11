@@ -18,11 +18,19 @@ How we declare our classes, methods and variables affects the code behavior.
 * String is not a primitive type, but a class. Primitive types can't be used directly in ArrayList and hence all primitive types needs to be converted to class before saving.
 * Type conversion during invocation based on the type declaration. Example: `MyGenericArrayList<E>` declare a generics class with a formal type parameter <E>. During an actual invocation, e.g., `MyGenericArrayList<String>`, a specific type <String>, or actual type parameter, replaced the formal type parameter <E>.
 * Erasure, is the process in which compiler translates generic type class `public class MyGenericArrayList<E>` and/or generic type methods `public static <E> void ArrayToArrayList(E[] a, ArrayList<E> lst) { ... }` during compilation. All the generic types are replaced with type Object by default (or the upper bound of type). The translated version of method is as follows: `public static void ArrayToArrayList(Object[] a, ArrayList lst) { ... }`.
+* `ListIterator<E>` is more efficient and useful than `Iterator<E>` in case of sorting LinkedList. The reason is using ListIterator we can go back in the list where as in Iterator we cannot. Example: ` LinkedList<String> names = new LinkedList<Strings>();` we can do `names.next()` to go to next element and `names.previous()` to go back to previous one.
+* `static` method are accessed without initiating the class object. Example: `value = ClassName.method();`
+* Java automatically upcast child class variable (subclass) to super class type (parent), Example: `Parent parent = new Child();`. Here parent ( child class variable ) to Parent class. But we can downcast by doing so, Example: `Parent p = new Parent(); (Child(p)).parentMethod();`
+* Inner class can access all of it's parent class variable and methods but inner class cannot be accessed outside of the parents class.
+* `Thread.sleep()` throws an InterruptedException, so be sure to surround it with a try/catch block.
+
 
 ### IntelliJ Shortcut:
 * `sout` : System.out.println();
 * `Command + Option + L` => reformat the code.
 * `Command + /` => comment selected line.
+* `psvm` : public static void main.
+* `Fn + Alt + F1` : Option to show file in project.
 
 ### IntelliJ Build:
 * If we need to build a standalone java project then `Build > Build Project`. This will create `out/production/project/..` directory with compiled files and manifest.
@@ -131,6 +139,8 @@ Here is the example of using [multiple constructors](https://github.com/citta-la
 
 Inheritance can be implemented by extending the child class with another base class ( acts as parent ). Example: `public class Dog extends Animal`. In child class ( Dog ) we need to use `super` to call the default constructor from the parent class (Animal). We can access all public variables, methods of parent (Animal) via child class instance variable ( which looks child class first, and if it doesn't find then it will call parent class method etc). However we can by pass this by using `super`. Example: `super.parentClassMethod()`.
 
+"Inheritance is the process that enables one class to acquire the properties (methods and variables) of another. With inheritance, the information is placed in a more manageable, hierarchical order."
+
 4.1: Parent class:             
 Lets assume the Animal can be called by instantiating the class with no parameters i.e `new Animal();` or passing two required parameters i.e `new Animal("jack",3);`. Also animal class has its unique method checkHealth.
 ```java
@@ -176,6 +186,8 @@ public class Dog extends Animal {
 ### 5. Composition & Encapsulation:
 
 In java we cannot do multiple inheritance and can only extend one super class, to avoid this people often use interface to overcome this problem. Also subclasses must declare super class constructors and has to pass all the required parameters. So developers often use class composition to have more flexibility in the code layer, Composition is nothing but calling different class object with in another class to process the required functionality. Encapsulation is hiding variable and/or method access to other class by declaring them `private`. The best example for encapsulation is `setter and getter class`. The below example covers both class composition and encapsulation,
+
+>To achieve encapsulation in Java, declare the class' variables as private and provide public setter and getter methods to modify and view the variables' values.
 
 5.1: What ?  
 Lets create person class which should get instantiated if the `sex` is passed as an argument and if the `sex` is valid then we can let other classes to access the `processPerson` method to pass the age of the person and respond with the message. `Sex` class we should only take gender string as `male` or `female` and people shouldn't be allowed to set gender directly or age directly in `Person` class ( encapsulation in both case ).
@@ -249,6 +261,8 @@ public class Main {
 ### 6. Polymorphism :
 
 When we inherit a subclass (example: BMW ) from parent class  (example: Car) we get an ability to retrieve all public methods and variables of the super class ( parent class ). Because of inheritance we get an option to override the super class methods or use the super class method without overriding in the subclass. If the child object calls the method not defined in child class but in super class then it calls the super class method, if the child and super class has same methods due to method overriding then object of child class will refer child class method.
+
+>> Implementing parent class method in subclass based on it's requirement is called method overriding and having same method name with different parameters are called method overloading. Method overriding is also known as runtime polymorphism and method overloading is compile-time polymorphism.
 
 ### 7. Array and ArrayList :
 
@@ -328,7 +342,124 @@ People person = People.createPerson(name, race);
 addPeople(person);
 ```
 
+### 8. LinkedList :
 
+In ArrayList if we need to add an item to an existing list then there will be a shift of existing items to the right or down ( whatever direction preferred while displaying ). Similarly, we are removing an item from the list then existing items need to be shifted left or up to form newly formed list. This process is time consuming and takes lot of computer processing in large ArrayList, to rescue this we leverage LinkedList.
+
+8.1 Why LinkedList ?  
+Lets assume original players list was added with few names
+```java
+ArrayList<String> players = new ArrayList<String>();
+players.add("Dan"); //index 0
+players.add("Steve"); //index 1
+players.add("Jack"); //index 2
+```
+If we are trying to add new player `Adam` in position 1 after `Dan` and before `Steve` then java would be rearranging the list.
+```java
+players.add(1, "Adam"); //adding with index position
+```
+So the new list would look like `Dan, Adam, Steve, Jack` in index position 0,1,2,3 respectively. In LinkedList each element is connected to it's next element, so in case of insertion the reference from `Dan` will change to `Adam` instead of `Steve` and forms the new list. So insertion and/or deletion will be much faster.
+
+>>The ArrayList is better for storing and accessing data, as it is very similar to a normal array.
+The LinkedList is better for manipulating data, such as making numerous inserts and deletes.
+
+### 9. Abstract and Interface.
+
+An interface is a completely abstract class without explicit use of keyword `abstract`. In case of Abstract class the class needs to be defined as `Abstract class Book { }` and abstract method needs to be defined with abstract keyword as well `abstract bookColor( ){ }`. So each method in interface class is also abstract methods and we don't have to explicitly define using keyword abstract. The main advantage of interface is "A class can inherit from just one superclass, but can implement multiple interfaces!".
+
+Example:
+```java
+interface Animal {
+  public void eat();
+  public void makeSound();
+}
+
+class Cat implements Animal {
+  public void makeSound() {
+    System.out.println("Meow!!!!");
+  }
+  public void eat() {
+    System.out.println("Ahouch!!!");
+  }
+}
+```
+When we implement interface we need to override all of it's methods.
+
+### 10. Anonymous Class
+
+Anonymous class is a way to extend the class on fly, typically we use @Override annotation to define the method has been overridden. Anonymous class examples in different scenarios are mentioned below,
+
+#10.1 Overriding
+```java
+class A{
+   public void methodA() {
+      System.out.println("methodA");
+    }
+}
+class B{
+    A a = new A() {
+     @Override public void methodA() {
+        System.out.println("anonymous methodA");
+     }
+   };
+}
+```
+the modification of methodA is only applied to class B and if we create new instance of class A then we would be refer back to the original methodA declaration from class A.
+
+#10.2 Implementing Interface
+```java
+interface interfaceA{
+   public void methodA();
+}
+class B{
+   interfaceA a = new interfaceA() {
+     @Override public void methodA() {
+        System.out.println("anonymous methodA implementer");
+     }
+   };
+}
+```
+#10.3 In Map
+```java
+Map map = new HashMap() {{
+   put("key", "value");
+}};
+```
+### 11. Threads
+
+Life Cycle of threads ` New > Runnable > Running > Waiting > Dead `. Example of using thread in a class by extending the Thread class looks like below, when we create an object of class Loader it runs on new thread. Priority of thread ranges from 1 to 10 and by default all threads have set priority as 5. We can change the priority by calling setPriority(5).
+      Override the run method in extending class and start the thread by calling Thread implemented class object with start method. Example: `obj.start();`
+```java
+class Loader extends Thread {
+  public void run() {
+    System.out.println("Hello");
+  }
+}
+
+class MyClass {
+  public static void main(String[ ] args) {
+    Loader obj = new Loader();
+    obj.start();
+  }
+}
+```
+Another way of implementing Thread is by implementing Runnable interface. As we know interface is implicit abstract class and with abstract methods, so we would need to override the Runnable class methods. i.e `run` method needs to be overwritten in implementing class and pass the instance of implemented class to thread object. Example: `Thread thread = new Thread(new Child());` where `class Child implements Runnable`.Please refer below example,
+
+```java
+class Loader implements Runnable {
+  public void run() {
+    System.out.println("Hello");
+  }
+}
+
+class MyClass {
+  public static void main(String[ ] args) {
+    Thread t = new Thread(new Loader());
+    t.start();
+  }
+}
+```
+ Implementing the Runnable interface is the preferred way to start a Thread, because it enables us to extend from another class, as well.
 
 ### Code Review Checklist
 Separate checklist to follow some of the best practices in programming [Code Review](https://github.com/citta-lab/java/blob/master/codereview.md)
