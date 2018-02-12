@@ -527,26 +527,9 @@ public class Worker {
 ```
 The main class will have two methods one for preparing the data by adding Worker object to the key and in second method processData we will retrieve the values ( here we have two different approach ).
 ```java
-package com.company;
-
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
-
-public class Main {
-
-    public static void main(String[] args) {
-
-        //prepare data to work
-        HashMap<String, Worker> hashMap = new HashMap<>();
-        prepData(hashMap);
-
-        //should have data to play around
-        processData(hashMap);
-    }
-
-    public static void prepData(HashMap<String, Worker> hashMap) {
-        //One way to add
+public static void prepData(HashMap<String, Worker> hashMap)
+{
+       //One way to add
         Worker itWorker = new Worker("Jack", "JavaDeveloper", 22);
         hashMap.put("Google", itWorker);
         //Another way
@@ -554,8 +537,10 @@ public class Main {
         hashMap.put("Google", new Worker("Mahesh", "Developer", 30));
         hashMap.put("Apple", new Worker("Jen", "Manager", 37));
     }
-
-    public static void processData(HashMap<String, Worker> hashMap) {
+```
+Here we will process the data / retrieve the values.
+```java
+public static void processData(HashMap<String, Worker> hashMap) {
 
         //One way to extract
         for (String key : hashMap.keySet()) {
@@ -568,13 +553,12 @@ public class Main {
         Iterator it = hashMap.entrySet().iterator();
         System.out.println(" ");
         while (it.hasNext()) {
-            Map.Entry hashObject = (Map.Entry) it.next(); //holds both key and values
-            String key = hashObject.getKey().toString(); //need to convert object to string 
+            Map.Entry hashObject = (Map.Entry) it.next();
+            String key = hashObject.getKey().toString();
             Worker worker = (Worker) hashObject.getValue();
             System.out.println(key + " > employee " + worker.getName() + " (" + worker.getAge() + ") " + "is a " + worker.getSkill());
         }
     }
-}
 ```
 
 ### Code Review Checklist
