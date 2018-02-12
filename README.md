@@ -23,6 +23,7 @@ How we declare our classes, methods and variables affects the code behavior.
 * Java automatically upcast child class variable (subclass) to super class type (parent), Example: `Parent parent = new Child();`. Here parent ( child class variable ) to Parent class. But we can downcast by doing so, Example: `Parent p = new Parent(); (Child(p)).parentMethod();`
 * Inner class can access all of it's parent class variable and methods but inner class cannot be accessed outside of the parents class.
 * `Thread.sleep()` throws an InterruptedException, so be sure to surround it with a try/catch block.
+* Check if object `maybeList` is ArrayList ? `maybeList instanceof List<?>` will return boolean value.
 
 
 ### IntelliJ Shortcut:
@@ -31,6 +32,7 @@ How we declare our classes, methods and variables affects the code behavior.
 * `Command + /` => comment selected line.
 * `psvm` : public static void main.
 * `Fn + Alt + F1` : Option to show file in project.
+* `fn + option + Enter `: Auto import.
 
 ### IntelliJ Build:
 * If we need to build a standalone java project then `Build > Build Project`. This will create `out/production/project/..` directory with compiled files and manifest.
@@ -460,6 +462,37 @@ class MyClass {
 }
 ```
  Implementing the Runnable interface is the preferred way to start a Thread, because it enables us to extend from another class, as well.
+
+### 12. HashMap
+
+ArrayList holds the values by adding index internally, whereas HashMap stores it by key value pair and hence the memory consumption is higher than List. But HashMap also stores values without any order unlike ArrayList ( order is maintained in ArrayList ) and the important benefit is no duplicates allowed in HashMap.
+
+#### 12.1 Simple HashMap
+```java
+HashMap<String, Integer> hashMap = new HashMap< >();
+hashMap.put("Bob", 22);
+hashMap.put("Rob", 28);
+```
+
+#### 12.2 ArrayList in HashMap
+```java
+HashMap<String, ArrayList<Integer>> hashMap = new HashMap<>();
+hashMap.put("Bob", new ArrayList<Integer>(Arrays.asList(0, 4, 8, 9, 12)));
+//or
+Integer[] intArray = {20, 11, 13};
+hashMap.put("Rob", new ArrayList<Integer>(Arrays.asList(intArray)));
+```
+
+#### 12.3 Retrieve HashMap data
+```java
+HashMap<String, ArrayList<Integer>> arrayListHashMap = new HashMap<>();
+Iterator it = arrayListHashMap.entrySet().iterator(); //entrySet is used to iterate keys
+while(it.hasNext()){
+  Map.Entry mapPair = (Map.Entry)it.next(); //will fetch key and value
+  System.out.print(mapPair.getKey()); //will have key
+  System.out.print(":"+mapPair.getValue()); //will have value 
+}
+```
 
 ### Code Review Checklist
 Separate checklist to follow some of the best practices in programming [Code Review](https://github.com/citta-lab/java/blob/master/codereview.md)
