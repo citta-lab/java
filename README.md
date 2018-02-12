@@ -490,7 +490,90 @@ Iterator it = arrayListHashMap.entrySet().iterator(); //entrySet is used to iter
 while(it.hasNext()){
   Map.Entry mapPair = (Map.Entry)it.next(); //will fetch key and value
   System.out.print(mapPair.getKey()); //will have key
-  System.out.print(":"+mapPair.getValue()); //will have value 
+  System.out.print(":"+mapPair.getValue()); //will have value
+}
+```
+#### 12.4 HashMap with Object
+Often we will have value as an object instead of simple Integer or String, In below scenario we will first create `HashMap<String, ClassName>` and later we will retrieve the value of an object using HashMap key.
+
+So we will be creating class Worker to hold worker name, age and skills. To minimize the code and for ease we will have `Worker` class constructer to initialize these values. Worker class will look like below,
+```java
+package com.company;
+
+public class Worker {
+
+    private String name;
+    private String skill;
+    private Integer age;
+
+    public Worker(String name, String skill, int age) {
+        this.name = name;
+        this.skill = skill;
+        this.age = (Integer) age;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getSkill() {
+        return skill;
+    }
+
+    public Integer getAge() {
+        return age;
+    }
+}
+```
+The main class will have two methods one for preparing the data by adding Worker object to the key and in second method processData we will retrieve the values ( here we have two different approach ).
+```java
+package com.company;
+
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+
+public class Main {
+
+    public static void main(String[] args) {
+
+        //prepare data to work
+        HashMap<String, Worker> hashMap = new HashMap<>();
+        prepData(hashMap);
+
+        //should have data to play around
+        processData(hashMap);
+    }
+
+    public static void prepData(HashMap<String, Worker> hashMap) {
+        //One way to add
+        Worker itWorker = new Worker("Jack", "JavaDeveloper", 22);
+        hashMap.put("Google", itWorker);
+        //Another way
+        hashMap.put("Yelp", new Worker("Emily", "SolutionDesigner", 27));
+        hashMap.put("Google", new Worker("Mahesh", "Developer", 30));
+        hashMap.put("Apple", new Worker("Jen", "Manager", 37));
+    }
+
+    public static void processData(HashMap<String, Worker> hashMap) {
+
+        //One way to extract
+        for (String key : hashMap.keySet()) {
+            Worker worker = hashMap.get(key);
+            System.out.print("");
+            System.out.println(key + " : employee " + worker.getName() + " (" + worker.getAge() + ") " + "is a " + worker.getSkill());
+        }
+
+        //Another way to extract
+        Iterator it = hashMap.entrySet().iterator();
+        System.out.println(" ");
+        while (it.hasNext()) {
+            Map.Entry hashObject = (Map.Entry) it.next(); //holds both key and values
+            String key = hashObject.getKey().toString(); //need to convert object to string 
+            Worker worker = (Worker) hashObject.getValue();
+            System.out.println(key + " > employee " + worker.getName() + " (" + worker.getAge() + ") " + "is a " + worker.getSkill());
+        }
+    }
 }
 ```
 
