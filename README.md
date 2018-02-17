@@ -367,6 +367,25 @@ The LinkedList is better for manipulating data, such as making numerous inserts 
 
 ### 9. Abstract and Interface.
 
+Abstract class is boiler plate class which defines the idea and let the subclasses ( child ) classes implement the idea according to their requirement. So we cannot instantiate Abstract class but we certainly can instantiate child/subclass which extends the Abstract class. Abstract class can have any number of constructors just like normal class and default constructor is used if not defined explicitly.
+
+Example:
+```java
+abstract class Household{
+  abstract void getCash();
+}
+
+class Parent extends Household{
+  int cashLimit;
+  Parent(){
+    cashLimit = 10000;
+  }
+  void getCash(){
+    System.out.println(" can get all money :"+cashLimit);
+  }
+}
+```
+
 An interface is a completely abstract class without explicit use of keyword `abstract`. In case of Abstract class the class needs to be defined as `Abstract class Book { }` and abstract method needs to be defined with abstract keyword as well `abstract bookColor( ){ }`. So each method in interface class is also abstract methods and we don't have to explicitly define using keyword abstract. The main advantage of interface is "A class can inherit from just one superclass, but can implement multiple interfaces!".
 
 Example:
@@ -377,6 +396,8 @@ interface Animal {
 }
 
 class Cat implements Animal {
+  //Use 'implements' while implementing Interfaces
+  //Don't use 'extends'
   public void makeSound() {
     System.out.println("Meow!!!!");
   }
@@ -385,7 +406,9 @@ class Cat implements Animal {
   }
 }
 ```
-When we implement interface we need to override all of it's methods.
+When we implement interface we need to override all of it's methods. Every field of an interface is public, static and final (By default, every member of an interface is public and while implementing you should not reduce this visibility).
+
+>> Interface will have only abstraction methods unlike Abstract class ( which can also have concrete methods ) and hence Interfaces show 100% abstractness.
 
 ### 10. Anonymous Class
 
@@ -494,9 +517,7 @@ while(it.hasNext()){
 }
 ```
 #### 12.4 HashMap with Object
-Often we will have value as an object instead of simple Integer or String, In below scenario we will first create `HashMap<String, ClassName>` and later we will retrieve the value of an object using HashMap key.
-
-So we will be creating class Worker to hold worker name, age and skills. To minimize the code and for ease we will have `Worker` class constructer to initialize these values. Worker class will look like below,
+Often we will have value as an object instead of simple Integer or String, In below scenario we will first create `HashMap<String, ClassName>` and later we will retrieve the value of an object using HashMap key. So we will be creating class Worker to hold worker name, age and skills. To minimize the code and for ease we will have `Worker` class constructer to initialize these values. Worker class will look like below,
 ```java
 package com.company;
 
