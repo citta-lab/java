@@ -18,10 +18,11 @@ public class Main {
 
     public static void main(String[] args) {
 
-
+        // making logger print message in console.
         ConsoleHandler handler = new ConsoleHandler();
         handler.setLevel(Level.ALL);
 
+        // initializing our list
         LinkedList<String> newList = new LinkedList<>();
 
         // sending to method to add the items in order and to prevent duplicates
