@@ -73,3 +73,14 @@ public class Main {
     }
 }
 ```
+Resulting output would be
+
+```java
+Apple
+INFO:  we already have item : Apple in the list.
+Banana
+Blueberry
+Mango
+Orange
+grapes
+```

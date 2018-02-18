@@ -365,6 +365,8 @@ So the new list would look like `Dan, Adam, Steve, Jack` in index position 0,1,2
 >>The ArrayList is better for storing and accessing data, as it is very similar to a normal array.
 The LinkedList is better for manipulating data, such as making numerous inserts and deletes.
 
+Example of adding items to the LinkedList and making use of LinkedListIterator (iterator) to prevent duplicates and sorting is explained in [LinkedListIterator](https://github.com/citta-lab/java/blob/master/list/linkedListIterator.md) example. 
+
 ### 9. Abstract and Interface.
 
 Abstract class is boiler plate class which defines the idea and let the subclasses ( child ) classes implement the idea according to their requirement. So we cannot instantiate Abstract class but we certainly can instantiate child/subclass which extends the Abstract class. Abstract class can have any number of constructors just like normal class and default constructor is used if not defined explicitly.
