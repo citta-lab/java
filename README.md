@@ -21,7 +21,7 @@ How we declare our classes, methods and variables affects the code behavior.
 * `ListIterator<E>` is more efficient and useful than `Iterator<E>` in case of sorting LinkedList. The reason is using ListIterator we can go back in the list where as in Iterator we cannot. Example: ` LinkedList<String> names = new LinkedList<Strings>();` we can do `names.next()` to go to next element and `names.previous()` to go back to previous one.
 * `static` method are accessed without initiating the class object. Example: `value = ClassName.method();`
 * Java automatically upcast child class variable (subclass) to super class type (parent), Example: `Parent parent = new Child();`. Here parent ( child class variable ) to Parent class. But we can downcast by doing so, Example: `Parent p = new Parent(); (Child(p)).parentMethod();`
-* Inner class can access all of it's parent class variable and methods but inner class cannot be accessed outside of the parents class.
+* Inner class can access all of it's parent class variable and methods but inner class cannot be accessed outside of the parents class. Example of accessing inner class `OuterClass.InnerClass innerClassInstance = outerClassInstance.new InnerClass();`
 * `Thread.sleep()` throws an InterruptedException, so be sure to surround it with a try/catch block.
 * Check if object `maybeList` is ArrayList ? `maybeList instanceof List<?>` will return boolean value.
 
@@ -365,7 +365,7 @@ So the new list would look like `Dan, Adam, Steve, Jack` in index position 0,1,2
 >>The ArrayList is better for storing and accessing data, as it is very similar to a normal array.
 The LinkedList is better for manipulating data, such as making numerous inserts and deletes.
 
-Example of adding items to the LinkedList and making use of LinkedListIterator (iterator) to prevent duplicates and sorting is explained in [LinkedListIterator](https://github.com/citta-lab/java/blob/master/list/linkedListIterator.md) example. 
+Example of adding items to the LinkedList and making use of LinkedListIterator (iterator) to prevent duplicates and sorting is explained in [LinkedListIterator](https://github.com/citta-lab/java/blob/master/list/linkedListIterator.md) example.
 
 ### 9. Abstract and Interface.
 
@@ -409,6 +409,15 @@ class Cat implements Animal {
 }
 ```
 When we implement interface we need to override all of it's methods. Every field of an interface is public, static and final (By default, every member of an interface is public and while implementing you should not reduce this visibility).
+
+We cannot do `Animal anima = new Animal();` because Animal is an interface and doesn't have actual implementation and hence we need to instantiate with the subclass which implements the interface. If the class implements an interface and has some extra method which is not defined in interface then we need to explicitly cast the object to point actual class.
+Example:
+```java
+Animal cat = new Cat();
+// imagine we have a method getCatTailLength() in Cat class then
+double length = ((Cat) cat).getCatTailLength();
+// we are telling java to point it to actual class instead of interface definations.
+```
 
 >> Interface will have only abstraction methods unlike Abstract class ( which can also have concrete methods ) and hence Interfaces show 100% abstractness.
 
